@@ -10,7 +10,7 @@ jobs:
           ls ${{ github.workspace }}  
           echo Run Test  
   build: 
-    if: github.repository == 'inky4832/gha5-if-action' 
+    if: github.repository == 'suis0229/action-test' 
     needs: test  
     runs-on: ubuntu-latest  
     steps:  
