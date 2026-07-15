@@ -1,31 +1,30 @@
-name: Matrix workflow  
+name: if action workflow  
 on: push  
 jobs:  
-  test:  
-      
-    strategy:	  
-      matrix:  
-        os: [ubuntu-latest, windows-latest]  
-        version: [18, 20]  
-        include:  
-          - os: ubuntu-latest  
-            version: 19  
-        exclude:  
-          - os: ubuntu-latest  
-            version: 18
-    continue-on-error: true
-    runs-on: ${{ matrix.os }}  
+  test:
+    runs-on: ubuntu-latest      
     steps:  
-      - name: Checkout  
-        uses: actions/checkout@v4  
-      - name: Set up Node.js  
-        uses: actions/setup-node@v4  
-        with:  
-          node-version: ${{ matrix.version }}  
-      - name: Install dependencies  
-        run: npm install axios  
       - name: Run Test  
-        run: echo Run Test
-
-
-
+        if: runner.os == 'Linux'
+        run: |  
+          ls ${{ github.workspace }}  
+          echo Run Test  
+  build: 
+    if: github.repository == 'inky4832/gha5-if-action' 
+    needs: test  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Run Build  
+        run: |  
+          ls ${{ github.workspace }} 
+          echo Run Build  
+  deploy:  
+    needs: build  
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Run Deploy1
+        id: run_deploy1         
+        run: echo Run Deploy1
+      - name: Run Deploy2 
+        if: steps.run_deploy1.outcome == 'success'
+        run: echo Run Deploy2
