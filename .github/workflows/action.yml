@@ -1,13 +1,11 @@
-name: advanced event activity type action workflow  
+name: advanced event filters action workflow  
 on: 
     push:  
-    issues:
-        types:
-        - opened
-        - edited
+      branches:
+        - 'hotfix' 
 jobs:  
   test:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest      
     steps:  
       - name: Run Test  
         run: |  
