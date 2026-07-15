@@ -1,12 +1,12 @@
-name: First workflow
-on: workflow_dispatch
+name: First workflow2
+on: push
 jobs:
-  first-job:
+  first-job2:
     runs-on: ubuntu-latest
     steps:
-      - name: Print greeting
-        run: echo "Hello World"
-      - name: Print Good Bye
-        run: |
-         echo "완료1"
-         echo "완료2"
+      - name: github checkout
+        # https://github.com/marketplace/actions/checkout 참조
+        uses: actions/checkout@v4
+      - name: Run a one-line script
+        run:  echo " The ${{ github.repository }} repository has been cloned to the runner."
+
