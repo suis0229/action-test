@@ -1,12 +1,19 @@
-name: First workflow2
+name: First workflow3
 on: push
 jobs:
-  first-job2:
+  first-job3:
     runs-on: ubuntu-latest
     steps:
-      - name: github checkout
-        # https://github.com/marketplace/actions/checkout 참조
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Run a one-line script
-        run:  echo " The ${{ github.repository }} repository has been cloned to the runner."
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: install dependencies
+        run: npm install axios
+
+      - name: Run a one-line script
+        run: echo " The ${{ github.repository }} repository has been cloned to the runner."
