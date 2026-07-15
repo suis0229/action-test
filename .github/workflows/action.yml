@@ -1,12 +1,13 @@
-name: advanced event action workflow  
-
-on: [push, pull_request, issues, fork, workflow_dispatch]  
-
+name: advanced event activity type action workflow  
+on: 
+    push:  
+    issues:
+        types:
+        - opened
+        - edited
 jobs:  
-  
   test:
     runs-on: ubuntu-latest  
-    
     steps:  
       - name: Run Test  
         run: |  
