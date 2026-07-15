@@ -1,7 +1,8 @@
-name: Multi Job workflow
+name: Multi Job workflow-needs
 on: push
 jobs:
   test:
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
